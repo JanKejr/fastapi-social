@@ -63,7 +63,6 @@ def change_password(user_check: schemas.UserCheckPassword, db: Session = Depends
 
     user.password = utils.hash(user_check.password)
     
-    #{"password": user.password}
     user_query.update({models.User.password: user.password}, synchronize_session=False)
     db.commit()
 

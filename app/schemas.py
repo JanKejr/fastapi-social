@@ -1,8 +1,8 @@
-# Responses
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
 
+#------------------------------------------
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -33,13 +33,12 @@ class UserInfo(BaseModel):
     class Config:
         orm_mode = True
 
-
 class UserCheckPassword(BaseModel):
     old_password: str
     password: str
 
 
-
+#-----------------------------------------
 
 class PostBase(BaseModel):
     title: str
@@ -58,6 +57,7 @@ class Post(PostBase):
     class Config:
         orm_mode = True    
 
+#--------------------------------------
   
 class Token(BaseModel):
     access_token: str

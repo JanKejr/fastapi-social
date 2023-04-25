@@ -19,10 +19,11 @@ def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.
     # (get_post) podle ID prihlaseneho uzivatele
     # posts_to_get = db.query(models.Post).filter(models.Post.owner_id == current_user.id).all()
 
-    # if not posts_to_get:
-    #     raise HTTPException(status_code=status.HTTP_204_NO_CONTENT)
-
     posts_to_get = db.query(models.Post).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
+
+    if not posts_to_get:
+        raise HTTPException(status_code=status.HTTP_204_NO_CONTENT)
+    
     return posts_to_get
 
 @router.post("/", 
